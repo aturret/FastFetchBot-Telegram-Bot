@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "fastfetchbot-telegram-bot"
+version = "0.1.0"
+description = ""
+authors = ["aturret <enturreopy@gmail.com>"]
+license = "GPL-3.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-telegram-bot = { extras = ["callback-data", "rate-limiter"], version = "^21.6" }
+jinja2 = "^3.1.4"
+beautifulsoup4 = "^4.12.2"
+fake-useragent = "^1.5.1"
+aiofiles = "^24.1.0"
+pillow = "^10.0.0"
+python-magic = "^0.4.27"
+python-magic-bin = { version = "^0.4.14", optional = true }
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+
+[tool.poetry.extras]
+windows = ["python-magic-bin"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
