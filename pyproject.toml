@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fastfetchbot-telegram-bot"
-version = "0.1.0"
+version = "0.1.1"
 description = "The telegram bot service module for FastFetchBot project."
 authors = ["aturret <enturreopy@gmail.com>"]
 license = "GPL-3.0"
