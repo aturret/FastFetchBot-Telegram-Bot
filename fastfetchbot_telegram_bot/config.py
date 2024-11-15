@@ -94,8 +94,8 @@ TELEGRAM_GROUP_MESSAGE_BAN_LIST = ban_list_resolver(telegram_group_message_ban_l
 TELEGRAM_BOT_MESSAGE_BAN_LIST = ban_list_resolver(telegram_bot_message_ban_list)
 
 # fastfetch bot
-FASTFETCH_BOT_URL = env.get("FASTFETCH_BOT_URL", None)
-FASTFETCH_BOT_API_KEY = env.get("FASTFETCH_BOT_API_KEY", None)
+FASTFETCHBOT_HOST_URL = env.get("FASTFETCHBOT_HOST_URL", None)
+FASTFETCHBOT_API_KEY = env.get("FASTFETCHBOT_API_KEY", None)
 
 # extra functions
 FILE_EXPORTER_ON = env.get("FILE_EXPORTER_ON", False)

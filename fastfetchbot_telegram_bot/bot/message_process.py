@@ -11,11 +11,9 @@ from urllib.request import url2pathname
 import aiofiles
 from telegram import (
     Update,
-    MessageEntity,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     Message,
-    InputFile,
     InputMediaPhoto,
     InputMediaVideo,
     InputMediaDocument,
@@ -24,26 +22,20 @@ from telegram import (
 )
 from telegram.constants import ParseMode
 from telegram.ext import (
-    Application,
     CallbackContext,
     ContextTypes,
-    MessageHandler,
-    CallbackQueryHandler,
-    filters,
-    InvalidCallbackData,
-    AIORateLimiter,
 )
 
-from bot.formatting import message_formatting
-from config import FILE_EXPORTER_ON, OPENAI_API_KEY, TELEBOT_DEBUG_CHANNEL, TELEGRAM_CHANNEL_ID, \
+from fastfetchbot_telegram_bot.bot.formatting import message_formatting
+from fastfetchbot_telegram_bot.config import FILE_EXPORTER_ON, OPENAI_API_KEY, TELEBOT_DEBUG_CHANNEL, TELEGRAM_CHANNEL_ID, \
     TELEGRAM_CHANNEL_ADMIN_LIST, TELEGRAM_BOT_MESSAGE_BAN_LIST, TELEGRAM_GROUP_MESSAGE_BAN_LIST, TELEBOT_WRITE_TIMEOUT, \
     TELEGRAM_SINGLE_MESSAGE_MEDIA_LIMIT, TELEBOT_API_SERVER, TELEGRAM_FILE_UPLOAD_LIMIT, \
     TELEGRAM_FILE_UPLOAD_LIMIT_LOCAL_API, TELEGRAM_IMAGE_DIMENSION_LIMIT, TELEGRAM_IMAGE_SIZE_LIMIT
-from models.files import NamedBytesIO
-from utils.image import Image, check_image_type, image_compressing
-from utils.logger import logger
-from utils.network import get_url_metadata, get_item, download_file_by_metadata_item
-from utils.parser import list_to_string
+from fastfetchbot_telegram_bot.models.files import NamedBytesIO
+from fastfetchbot_telegram_bot.utils.image import Image, check_image_type, image_compressing
+from fastfetchbot_telegram_bot.utils.logger import logger
+from fastfetchbot_telegram_bot.utils.network import get_url_metadata, get_item, download_file_by_metadata_item
+from fastfetchbot_telegram_bot.utils.parser import list_to_string
 
 
 async def all_messages_process(update: Update, context: CallbackContext) -> None:
@@ -249,7 +241,7 @@ async def buttons_process(update: Update, context: CallbackContext) -> None:
                     chat_id = query.message.chat_id
             elif len(TELEGRAM_CHANNEL_ID) > 1:
                 choose_channel_keyboard = await _create_choose_channel_keyboard(
-                    data=data
+                    data=data, context=context
                 )
                 await query.message.reply_text(
                     text="Please choose the channel you want to send:",
@@ -284,10 +276,10 @@ async def buttons_process(update: Update, context: CallbackContext) -> None:
     context.drop_callback_data(query)
 
 
-async def _create_choose_channel_keyboard(data: dict) -> list:
+async def _create_choose_channel_keyboard(data: dict, context: CallbackContext) -> list:
     choose_channel_keyboard = []
     for i, channel_id in enumerate(TELEGRAM_CHANNEL_ID):
-        channel_chat = await application.bot.get_chat(chat_id=channel_id)
+        channel_chat = await context.bot.get_chat(chat_id=channel_id)
         choose_channel_keyboard.append(
             [
                 InlineKeyboardButton(

@@ -1,7 +1,7 @@
 import logging
 import os
 
-from config import LOG_LEVEL, LOG_FILE_PATH
+from fastfetchbot_telegram_bot.config import LOG_LEVEL, LOG_FILE_PATH
 
 level_to_name = {
     "DEBUG": logging.DEBUG,

@@ -5,10 +5,10 @@ from typing import Optional
 import httpx
 from fake_useragent import UserAgent
 
-from config import HTTP_REQUEST_TIMEOUT
-from models.files import NamedBytesIO
-from utils.logger import logger
-from utils.urlparser import generate_request_url
+from fastfetchbot_telegram_bot.config import HTTP_REQUEST_TIMEOUT
+from fastfetchbot_telegram_bot.models.files import NamedBytesIO
+from fastfetchbot_telegram_bot.utils.logger import logger
+from fastfetchbot_telegram_bot.utils.urlparser import generate_request_url
 
 
 async def get_url_metadata(url: str, ban_list: Optional[str] = None) -> dict:

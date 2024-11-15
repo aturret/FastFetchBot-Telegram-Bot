@@ -4,7 +4,7 @@ from io import BytesIO
 import magic
 from PIL import Image
 import asyncio
-from config import env
+from fastfetchbot_telegram_bot.config import env
 
 DEFAULT_IMAGE_LIMITATION = env.get("DEFAULT_IMAGE_LIMITATION", 1600)
 
@@ -28,6 +28,7 @@ def image_compressing(image: Image, limitation: int = DEFAULT_IMAGE_LIMITATION):
                 Image.Resampling.LANCZOS,
             )
     return new_image
+
 
 async def check_image_type(io_object: BytesIO):
     loop = asyncio.get_running_loop()

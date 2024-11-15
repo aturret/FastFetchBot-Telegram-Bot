@@ -1,21 +1,18 @@
 from telegram import MessageEntity
 from telegram.ext import (
     Application,
-    CallbackContext,
-    ContextTypes,
     MessageHandler,
     CallbackQueryHandler,
     filters,
     InvalidCallbackData,
-    AIORateLimiter,
 )
 
-from bot.message_process import (all_messages_process,
-                                 invalid_buttons,
-                                 https_url_process,
-                                 https_url_auto_process,
-                                 error_process,
-                                 buttons_process)
+from fastfetchbot_telegram_bot.bot.message_process import (all_messages_process,
+                                                           invalid_buttons,
+                                                           https_url_process,
+                                                           https_url_auto_process,
+                                                           error_process,
+                                                           buttons_process)
 
 
 def add_handlers(application: Application) -> None:

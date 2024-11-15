@@ -1,12 +1,12 @@
-from bot.application import run_bot
-from config import FASTFETCH_BOT_URL
+from fastfetchbot_telegram_bot import FastFetchBot
+from fastfetchbot_telegram_bot.config import FASTFETCHBOT_HOST_URL
 
 
 def main() -> None:
     """Start the bot."""
-    if not FASTFETCH_BOT_URL:
+    if not FASTFETCHBOT_HOST_URL:
         raise ValueError("FAST_FETCH_BOT_URL is not set")
-    run_bot()
+    FastFetchBot().set_webhook(FASTFETCHBOT_HOST_URL)
 
     # Create the Application and pass it your bot's token.
 
